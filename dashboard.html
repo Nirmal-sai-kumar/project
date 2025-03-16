@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Expense Navigator</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script>
+        function showSection(sectionId) {
+            document.getElementById('add-income').style.display = 'none';
+            document.getElementById('add-expense').style.display = 'none';
+            document.getElementById('view-income').style.display = 'none';
+            document.getElementById('view-expense').style.display = 'none';
+            
+            document.getElementById(sectionId).style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Dashboard</h2>
+        <nav>
+            <button onclick="showSection('add-income')">Add Income</button>
+            <button onclick="showSection('add-expense')">Add Expense</button>
+            <button onclick="showSection('view-income')">View Income</button>
+            <button onclick="showSection('view-expense')">View Expense</button>
+            <a href="logout.php">Logout</a>
+        </nav>
+        
+        <section id="add-income" style="display: none;">
+            <h3>Add Income</h3>
+            <form action="income.php" method="POST">
+                <label for="income-date">Date:</label>
+                <input type="date" id="income-date" name="income_date" required>
+                
+                <label for="job-title">Job Title:</label>
+                <input type="text" id="job-title" name="job_title" required>
+                
+                <label for="income-amount">Amount:</label>
+                <input type="number" id="income-amount" name="income_amount" required>
+                
+                <button type="submit" name="add_income">Add Income</button>
+            </form>
+        </section>
+        
+        <section id="add-expense" style="display: none;">
+            <h3>Add Expense</h3>
+            <form action="expense.php" method="POST">
+                <label for="expense-date">Date:</label>
+                <input type="date" id="expense-date" name="expense_date" required>
+                
+                <label for="source">Source:</label>
+                <input type="text" id="source" name="source" required>
+                
+                <label for="expense-amount">Amount:</label>
+                <input type="number" id="expense-amount" name="expense_amount" required>
+                
+                <button type="submit" name="add_expense">Add Expense</button>
+            </form>
+        </section>
+        
+        <section id="view-income" style="display: none;">
+            <h3>View Income</h3>
+            <div id="income-list">
+                <?php include 'view_income.php'; ?>
+            </div>
+        </section>
+        
+        <section id="view-expense" style="display: none;">
+            <h3>View Expense</h3>
+            <div id="expense-list">
+                <?php include 'view_expense.php'; ?>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
